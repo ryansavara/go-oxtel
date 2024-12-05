@@ -60,8 +60,9 @@ const (
 	OXTEL_TRANSITION_TYPE_X_FADE OxtelTransitionType = 0x03
 	OXTEL_TRANSITION_TYPE_CUT    OxtelTransitionType = 0x05
 
-	OXTEL_MIXER_A OxtelMixerInput = 0x0
-	OXTEL_MIXER_B OxtelMixerInput = 0x1
+	OXTEL_MIXER_A          OxtelMixerInput = 0x0
+	OXTEL_MIXER_B          OxtelMixerInput = 0x1
+	OXTEL_MIXER_IN_BETWEEN OxtelMixerInput = 0x2
 
 	OXTEL_VIDEO_SOURCE_PLAYER_A OxtelVideoSource = 0x0
 	OXTEL_VIDEO_SOURCE_EXT_IN_1 OxtelVideoSource = 0x1
