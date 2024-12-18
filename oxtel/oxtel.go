@@ -15,7 +15,7 @@ type Oxtel struct {
 	port        uint16
 	conn        net.Conn
 	reader      bufio.Reader
-	RxMessages  chan string
+	rxMessages  chan string
 	lastCommand string
 	Unsolicited chan interface{}
 }
@@ -25,7 +25,7 @@ func NewOxtel(address string, port uint16) *Oxtel {
 		address:     address,
 		port:        port,
 		conn:        nil,
-		RxMessages:  make(chan string),
+		rxMessages:  make(chan string),
 		Unsolicited: make(chan interface{}),
 	}
 }
@@ -48,7 +48,7 @@ func (o *Oxtel) Disconnect() error {
 	if o.conn == nil {
 		return nil
 	}
-	close(o.RxMessages)
+	close(o.rxMessages)
 	close(o.Unsolicited)
 	err := o.conn.Close()
 
@@ -79,7 +79,7 @@ func (o *Oxtel) rxLoop() {
 
 func (o *Oxtel) handleMessage(message string) {
 	if len(o.lastCommand) > 0 && message[:len(o.lastCommand)] == o.lastCommand {
-		o.RxMessages <- message
+		o.rxMessages <- message
 	} else {
 		cleanMessage := message[:len(message)-1]
 		if message[0] == '3' {
@@ -459,7 +459,7 @@ func (o *Oxtel) sendCommandExpectResponse(cmd string, data string) (string, erro
 	timeout := time.After(5 * time.Second)
 	for {
 		select {
-		case unsolicited := <-o.RxMessages:
+		case unsolicited := <-o.rxMessages:
 			if unsolicited[:len(cmd)] == cmd {
 				return unsolicited[len(cmd) : len(unsolicited)-1], nil
 			}
