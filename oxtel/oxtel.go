@@ -82,6 +82,9 @@ func (o *Oxtel) handleMessage(message string) {
 		o.rxMessages <- message
 	} else {
 		cleanMessage := message[:len(message)-1]
+		// Non-blocking channel sending
+		var outval interface{}
+
 		if message[0] == '3' {
 			data := cleanMessage[1:]
 			layer, err := strconv.ParseUint(string(data[0]), 16, 8)
@@ -93,7 +96,7 @@ func (o *Oxtel) handleMessage(message string) {
 				panic("unable to parse direction from KeyerPositionTally")
 			}
 
-			o.Unsolicited <- KeyerPositionTally{
+			outval = KeyerPositionTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -109,7 +112,7 @@ func (o *Oxtel) handleMessage(message string) {
 
 			filename := data[1:]
 
-			o.Unsolicited <- ImageLoadTally{
+			outval = ImageLoadTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -125,7 +128,7 @@ func (o *Oxtel) handleMessage(message string) {
 
 			filename := data[1:]
 
-			o.Unsolicited <- ImagePreloadTally{
+			outval = ImagePreloadTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -172,7 +175,7 @@ func (o *Oxtel) handleMessage(message string) {
 
 			filename := data[7:]
 
-			o.Unsolicited <- MediaTally{
+			outval = MediaTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -199,7 +202,7 @@ func (o *Oxtel) handleMessage(message string) {
 				panic("unable to parse state from PlayStateTally")
 			}
 
-			o.Unsolicited <- PlayStateTally{
+			outval = PlayStateTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -237,7 +240,7 @@ func (o *Oxtel) handleMessage(message string) {
 				panic("unable to parse layer 0 keyer from VideoTally")
 			}
 
-			o.Unsolicited <- VideoTally{
+			outval = VideoTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -260,7 +263,7 @@ func (o *Oxtel) handleMessage(message string) {
 				panic("unable to parse profile from AudioProfileTally")
 			}
 
-			o.Unsolicited <- AudioProfileTally{
+			outval = AudioProfileTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -298,7 +301,7 @@ func (o *Oxtel) handleMessage(message string) {
 			pLayer6 := (permanent & 0x00004000) != 0
 			pLayer7 := (permanent & 0x00008000) != 0
 
-			o.Unsolicited <- LockTally{
+			outval = LockTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -348,7 +351,7 @@ func (o *Oxtel) handleMessage(message string) {
 				panic("unable to parse state from ExternalIOSourceChangedTally")
 			}
 
-			o.Unsolicited <- ExternalIOSourceChangedTally{
+			outval = ExternalIOSourceChangedTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -408,7 +411,7 @@ func (o *Oxtel) handleMessage(message string) {
 				sdfFileName = &parts[2]
 			}
 
-			o.Unsolicited <- ExternalIODynamicConfigChangedTally{
+			outval = ExternalIODynamicConfigChangedTally{
 				UnsolicitedMessage: UnsolicitedMessage{
 					Raw: cleanMessage,
 				},
@@ -423,10 +426,15 @@ func (o *Oxtel) handleMessage(message string) {
 				SDPFileName:    sdfFileName,
 			}
 		} else {
-			unsolictedMsg := UnsolicitedMessage{
+			outval = UnsolicitedMessage{
 				Raw: message,
 			}
-			o.Unsolicited <- unsolictedMsg
+		}
+
+		// Send to the channel non-blocking
+		select {
+		case o.Unsolicited <- outval:
+		default:
 		}
 	}
 }
