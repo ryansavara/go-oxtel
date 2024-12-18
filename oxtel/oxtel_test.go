@@ -400,7 +400,7 @@ func TestChannelMasks(t *testing.T) {
 // 		t.Fatal(err)
 // 	}
 
-// 	if val[0:3] != "Tap" {
+// 	if val[:3] != "Tap" {
 // 		t.Fatal("media port name failed")
 // 	}
 // }

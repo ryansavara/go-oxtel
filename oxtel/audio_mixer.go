@@ -235,7 +235,7 @@ func (o *Oxtel) EnquireAudioGain(output OxtelAudioOutput, channelMask ChannelMas
 		return AudioGainResponse{}, err
 	}
 
-	source, err := strconv.ParseUint(string(val[0:2]), 16, 8)
+	source, err := strconv.ParseUint(string(val[:2]), 16, 8)
 	if err != nil {
 		return AudioGainResponse{}, err
 	}

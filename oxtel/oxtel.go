@@ -100,7 +100,7 @@ func (o *Oxtel) handleMessage(message string) {
 				Layer:     OxtelLayer(layer),
 				Direction: OxtelDirection(direction),
 			}
-		} else if message[0:2] == "Y9" {
+		} else if message[:2] == "Y9" {
 			data := cleanMessage[2:]
 			layer, err := strconv.ParseUint(string(data[0]), 16, 8)
 			if err != nil {
@@ -116,7 +116,7 @@ func (o *Oxtel) handleMessage(message string) {
 				Layer:    OxtelLayer(layer),
 				Template: filename,
 			}
-		} else if message[0:2] == "YA" {
+		} else if message[:2] == "YA" {
 			data := cleanMessage[2:]
 			layer, err := strconv.ParseUint(string(data[0]), 16, 8)
 			if err != nil {
@@ -132,7 +132,7 @@ func (o *Oxtel) handleMessage(message string) {
 				Layer:    OxtelLayer(layer),
 				Template: filename,
 			}
-		} else if message[0:2] == "YB" {
+		} else if message[:2] == "YB" {
 			data := cleanMessage[2:]
 
 			u1, err := strconv.ParseBool(string(data[0]))

@@ -324,7 +324,7 @@ func (o *Oxtel) EnquireMixMode() (MixModeResponse, error) {
 		return MixModeResponse{}, err
 	}
 
-	transitionType, err := strconv.ParseUint(val[0:2], 16, 8)
+	transitionType, err := strconv.ParseUint(val[:2], 16, 8)
 	if err != nil {
 		return MixModeResponse{}, err
 	}

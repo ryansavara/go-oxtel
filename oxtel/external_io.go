@@ -23,7 +23,7 @@ func (o *Oxtel) EnquireNumberOfExternalIOConfigurations(ioType OxtelExternalIOTy
 		return NumberOfExternalIOConfigurationsResponse{}, err
 	}
 
-	outType, err := strconv.ParseUint(string(val[0:2]), 16, 8)
+	outType, err := strconv.ParseUint(string(val[:2]), 16, 8)
 	if err != nil {
 		return NumberOfExternalIOConfigurationsResponse{}, err
 	}
@@ -71,7 +71,7 @@ func (o *Oxtel) EnquireExternalIOConfiguration(ioType OxtelExternalIOType, direc
 		return ExternalIOConfigurationResponse{}, err
 	}
 
-	outType, err := strconv.ParseUint(string(val[0:2]), 16, 8)
+	outType, err := strconv.ParseUint(string(val[:2]), 16, 8)
 	if err != nil {
 		return ExternalIOConfigurationResponse{}, err
 	}
@@ -173,7 +173,7 @@ func (o *Oxtel) EnquireExternalIOSource(direction OxtelExternalIODirection, ioId
 		return ExternalIOSourceResponse{}, err
 	}
 
-	outDir, err := strconv.ParseUint(string(val[0:2]), 16, 8)
+	outDir, err := strconv.ParseUint(string(val[:2]), 16, 8)
 	if err != nil {
 		return ExternalIOSourceResponse{}, err
 	}
@@ -291,7 +291,7 @@ func (o *Oxtel) EnquireExternalIODynamicConfiguration(direction OxtelExternalIOD
 		return ExternalIODynamicConfigurationResponse{}, err
 	}
 
-	outDir, err := strconv.ParseUint(string(val[0:2]), 16, 8)
+	outDir, err := strconv.ParseUint(string(val[:2]), 16, 8)
 	if err != nil {
 		return ExternalIODynamicConfigurationResponse{}, err
 	}

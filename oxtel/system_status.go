@@ -154,7 +154,7 @@ func (o *Oxtel) EnquireVideoLayerStatus(layer OxtelLayer) (VideoLayerStatusRespo
 		return VideoLayerStatusResponse{}, err
 	}
 
-	fadeAngle, err := strconv.ParseUint(string(val[0:3]), 16, 16)
+	fadeAngle, err := strconv.ParseUint(string(val[:3]), 16, 16)
 	if err != nil {
 		return VideoLayerStatusResponse{}, err
 	}
