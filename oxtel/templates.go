@@ -34,7 +34,7 @@ func LoadImage_AsString(layer OxtelLayer, templateName string) string {
 // EnquireLoadImage queries the template file that is currently loaded into the specified layer.
 // When no template is loaded on the specified layer, the filename will be ">Empty<".
 //
-// For HTML templates, the filename will contiane the directory name, slash, and template name. Example: a/a.html
+// For HTML templates, the filename will contain the directory name, slash, and template name. Example: a/a.html
 //
 // Response is a LayerTemplateResponse.
 func (o *Oxtel) EnquireLoadImage(layer OxtelLayer) (LayerTemplateResponse, error) {
@@ -57,7 +57,7 @@ func (o *Oxtel) EnquireLoadImage(layer OxtelLayer) (LayerTemplateResponse, error
 // EnquireLoadImage_AsString returns the command string used to query the template file that is currently loaded into
 // the specified layer.
 //
-// For use with scheduled commandfs.
+// For use with scheduled commands.
 func EnquireLoadImage_AsString(layer OxtelLayer) string {
 	return fmt.Sprintf("R0%x", layer)
 }
@@ -66,12 +66,12 @@ func EnquireLoadImage_AsString(layer OxtelLayer) string {
 // the on-air template in a frame-accurate manner.
 //
 // A preloaded template is loaded in an off-air location. When the preload is complete and a subsequent LoadImage command is
-// issued on the same layer and filename, the preloaded template is immeidately swapped onto the on-air loaction.
+// issued on the same layer and filename, the preloaded template is immediately swapped onto the on-air location.
 // If a different valid filename is requested in the LoadImage command, then the preloaded template is cleared.
 //
 // Load times are dependent on the template size and load on the system. Automation should take care to make sure the adequate
 // time is allowed for the template to be completely preloaded before sending the LoadImage command.
-// It is recommended that automation monitor the ImagePreloadTally (YA) to know whne the preload completes.
+// It is recommended that automation monitor the ImagePreloadTally (YA) to know when the preload completes.
 //
 // An unsolicited response will be sent if tallies are enabled with the format "YA%l %s" where %l is the layer and %s is the filename.
 func (o *Oxtel) PreloadImage(layer OxtelLayer, templateName string) error {

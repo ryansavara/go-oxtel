@@ -5,7 +5,7 @@ import "fmt"
 // OverrideSDIInputColorSpace overrides the color space for a given SDI input. Once the command is issued,
 // it will stick until another OverrideSDIInputColorSpace command or the MCS is reconfigured.
 //
-// If the MCS is reconfigurd, it will revert back to the SystemManager settings.
+// If the MCS is reconfigured, it will revert back to the SystemManager settings.
 func (o *Oxtel) OverrideSDIInputColorSpace(input OxtelMixerInput, colorSpace OxtelColorSpace) error {
 	return o.sendCommand(fmt.Sprintf("hCSI%01x%01x", input, colorSpace))
 }

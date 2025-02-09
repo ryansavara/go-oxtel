@@ -40,10 +40,10 @@ func EnquireLatency_AsString(source OxtelLatencySource) string {
 	return fmt.Sprintf("hLAT%x", source)
 }
 
-// EnquireNumberofGraphicLayers returns the number of graphic layers license for this channel.
+// EnquireNumberOfGraphicLayers returns the number of graphic layers license for this channel.
 //
 // Response is an integer representing the number of licensed graphic layers.
-func (o *Oxtel) EnquireNumberofGraphicLayers() (int, error) {
+func (o *Oxtel) EnquireNumberOfGraphicLayers() (int, error) {
 	val, err := o.sendCommandExpectResponse("hNGL", "")
 	if err != nil {
 		return 0, err
@@ -51,11 +51,11 @@ func (o *Oxtel) EnquireNumberofGraphicLayers() (int, error) {
 	return strconv.Atoi(val)
 }
 
-// EnquireNumberofGraphicLayers_AsString returns the command string used to return the number of graphic layers license
+// EnquireNumberOfGraphicLayers_AsString returns the command string used to return the number of graphic layers license
 // for this channel.
 //
 // For use with scheduled commands.
-func EnquireNumberofGraphicLayers_AsString() string {
+func EnquireNumberOfGraphicLayers_AsString() string {
 	return "hNGL"
 }
 
@@ -147,7 +147,7 @@ func EnquireSystemStatus_AsString() string {
 //
 // Only the Intuition SD/HD[+] format is supported which requires an additional parameter to identify the layer status to query.
 //
-// Resposne is a VideoLayerStatusResponse.
+// Response is a VideoLayerStatusResponse.
 func (o *Oxtel) EnquireVideoLayerStatus(layer OxtelLayer) (VideoLayerStatusResponse, error) {
 	val, err := o.sendCommandExpectResponse("N", fmt.Sprintf("%x", layer))
 	if err != nil {
@@ -297,7 +297,7 @@ func (o *Oxtel) EnquireSlaveLayerStatus() (SlaveLayerStatusResponse, error) {
 	}, nil
 }
 
-// EnquireSlaveLayerStatus_AsString returns the command string used to query the current stat of the keyr for each
+// EnquireSlaveLayerStatus_AsString returns the command string used to query the current state of the keyer for each
 // layer (0x1 = fader angle is 0x200, 0x0 = fader angle is not 0x200).
 //
 // For use with scheduled commands.

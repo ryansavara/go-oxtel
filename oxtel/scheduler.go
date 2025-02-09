@@ -7,9 +7,9 @@ import (
 
 // AddScheduledCommand schedules an automation command at the specified time in hours, minutes, seconds, and frames.
 //
-// Scheduled commands specify a timecode value. This value shoudl be specified as the time at whcih the command should be _recognized_.
-// i.e. Toxt + Tmcs before the command's results are seen on the SDI ouptut. Toxt is the Oxtel latency in reference fields
-// and Tmcs is the MCS latence in reference fields.
+// Scheduled commands specify a timecode value. This value should be specified as the time at which the command should be _recognized_.
+// i.e. Toxt + Tmcs before the command's results are seen on the SDI output. Toxt is the Oxtel latency in reference fields
+// and Tmcs is the MCS latency in reference fields.
 //
 // Refer to the Timing Model section for more details about latencies.
 //

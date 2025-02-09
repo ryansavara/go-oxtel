@@ -122,7 +122,7 @@ func (o *Oxtel) SetTransitionType(transitionType OxtelTransitionType) error {
 // SetTransitionType_AsString returns the command string used to select the A/B mixer transition type used in the
 // FadeToA, FadeToB, FadeAB and AsymmetricTransition commands.
 //
-// For use with scheudled commands.
+// For use with scheduled commands.
 func SetTransitionType_AsString(transitionType OxtelTransitionType) string {
 	return fmt.Sprintf("U6%02x", transitionType)
 }
@@ -451,7 +451,7 @@ func (o *Oxtel) EnquireVideoTallies() (bool, error) {
 // EnquireVideoTallies_AsString returns the command string used to query the state of the Video Tallies set using
 // the EnableVideoTallies command.
 //
-// For use with scheudled commands.
+// For use with scheduled commands.
 func EnquireVideoTallies_AsString() string {
 	return "Y6"
 }

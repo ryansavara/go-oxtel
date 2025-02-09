@@ -6,7 +6,7 @@ import "fmt"
 // If a prior fade is not finished when a reverse command is received, the fade transition will reverse direction and
 // continue at the same rate.
 //
-// The direction specifies the direciton of the fade transition.
+// The direction specifies the direction of the fade transition.
 //
 // The rate parameter specifies the number of fields (interlaced) or frames (progressive) in the fade transition.
 // When not specified, the value set using the SetTransitionDuration command will be used. The default value is 0.
@@ -44,7 +44,7 @@ func FadeKeyer_AsString(layer OxtelLayer, direction OxtelDirection, rate *uint16
 // CutKeyer cuts the specified graphic keying layer up or down. This command is the same as the FadeKeyer command executed
 // with a rate of 0.
 //
-// The direction specifies the direciton of the fade transition.
+// The direction specifies the direction of the fade transition.
 //
 // An unsolicited response will be transmitted as a OxtelKeyerPositionTally
 func (o *Oxtel) CutKeyer(layer OxtelLayer, direction OxtelDirection) error {

@@ -280,7 +280,7 @@ func SetExternalIODynamicConfiguration_AsString(direction OxtelExternalIODirecti
 }
 
 // EnquireExternalIODynamicConfiguration gets the dynamic configuration for the specified External IO. The External IO is defined
-// by the directon and IO Id.
+// by the direction and IO Id.
 //
 // For SDI, this command is not applicable.
 //
@@ -456,7 +456,7 @@ func (o *Oxtel) EnquireExternalInputs() (ExternalInputsResponse, error) {
 
 // EnquireExternalInputs_AsString returns the command string used to return a list of the external inputs supported by the channel. This command can be used to dynamically
 //
-// For use with scheduled commandfs.
+// For use with scheduled commands.
 func EnquireExternalInputs_AsString() string {
 	return "hXIN"
 }

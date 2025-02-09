@@ -54,12 +54,12 @@ func SetAudioLoudness_AsString(firstProgram AudioProgram, secondProgram *AudioPr
 //
 // Optionally specify the channel number to get the loudness setting on a specific channel.
 //
-// If loundness is not licensed, this will always return "jAL0000".
+// If loudness is not licensed, this will always return "jAL0000".
 //
 // Response is a AudioLoudnessResponse. Sdi, AudioProgram, and JungarProgram are only populated when a channel is specified.
 func (o *Oxtel) GetAudioLoudness(sdi uint8, channel *uint8) (AudioLoudnessResponse, error) {
 	if channel == nil {
-		// Return all audio channels that have loundess configured.
+		// Return all audio channels that have loudness configured.
 		val, err := o.sendCommandExpectResponse("jAL", fmt.Sprintf("%02x", sdi))
 		if err != nil {
 			return AudioLoudnessResponse{}, err
@@ -219,7 +219,7 @@ func GetAudioLoudness_AsString(sdi uint8, channel *uint8) string {
 	}
 }
 
-// DisableAudioLoudness stops all loundness processing.
+// DisableAudioLoudness stops all loudness processing.
 func (o *Oxtel) DisableAudioLoudness(sdi uint8) error {
 	if sdi > 2 {
 		return &InvalidSdiError{
@@ -233,7 +233,7 @@ func (o *Oxtel) DisableAudioLoudness(sdi uint8) error {
 	return o.sendCommand(msg)
 }
 
-// DisableAudioLoudness_AsString returns the commands string used to stop all loundness processing.
+// DisableAudioLoudness_AsString returns the commands string used to stop all loudness processing.
 //
 // For use with scheduled commands.
 func DisableAudioLoudness_AsString(sdi uint8) string {
@@ -263,7 +263,7 @@ func EnableAudioLoudness_AsString(sdi uint8) string {
 	return fmt.Sprintf("jALR%02x", sdi)
 }
 
-// ChangeAudioLoudnessProfile sets the Junger audio Loundness profile for the specified audio program.
+// ChangeAudioLoudnessProfile sets the Junger audio Loudness profile for the specified audio program.
 //
 // Audio profiles are set up in SystemManager. There can be up to 16 loudness profiles defined.
 // Only one profile is in effect at a time, and profiles other than 1, can only be selected with the SetAudioLoudness command.
@@ -289,7 +289,7 @@ func (o *Oxtel) ChangeAudioLoudnessProfile(sdi uint8, profile uint8) error {
 	return o.sendCommand(msg)
 }
 
-// ChangeAudioLoudnessProfile_AsString returns the command string used to set the Junger audio Loundness profile
+// ChangeAudioLoudnessProfile_AsString returns the command string used to set the Junger audio Loudness profile
 // for the specified audio program.
 //
 // For use with scheduled commands.
@@ -338,7 +338,7 @@ func (o *Oxtel) GetLoudnessLicenseStatus() (bool, error) {
 	return strconv.ParseBool(string(val[1]))
 }
 
-// GetLoudnessLicenseStatus_AsStrinc returns the command string used to query the current loudness license status.
+// GetLoudnessLicenseStatus_AsString returns the command string used to query the current loudness license status.
 //
 // For use with scheduled commands.
 func GetLoudnessLicenseStatus_AsString() string {

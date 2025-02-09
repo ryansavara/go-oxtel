@@ -63,7 +63,7 @@ func TestChannelMasks(t *testing.T) {
 // 	}
 // }
 
-// func TestEnqurieFileInfo(t *testing.T) {
+// func TestEnquireFileInfo(t *testing.T) {
 // 	val, err := oxtel.EnquireFileInfo(templateName)
 // 	if err != nil {
 // 		t.Fatal(err)
@@ -306,8 +306,8 @@ func TestChannelMasks(t *testing.T) {
 // 	}
 // }
 
-// func TestEnquireNumberofGraphicLayers(t *testing.T) {
-// 	val, err := oxtel.EnquireNumberofGraphicLayers()
+// func TestEnquireNumberOfGraphicLayers(t *testing.T) {
+// 	val, err := oxtel.EnquireNumberOfGraphicLayers()
 // 	if err != nil {
 // 		t.Fatal(err)
 // 	}

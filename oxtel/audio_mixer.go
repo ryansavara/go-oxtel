@@ -20,7 +20,7 @@ func (o *Oxtel) SetAudioABMixerFadeRate(duration uint16) error {
 	return o.sendCommand(msg)
 }
 
-// SetAudioABMixerFadeRate_AsStrig returns the command string used to set the fade rate for audio mixes.
+// SetAudioABMixerFadeRate_AsString returns the command string used to set the fade rate for audio mixes.
 //
 // For use with scheduled commands.
 func SrtAudioABMixerFadeRate_AsString(duration uint16) string {
@@ -143,7 +143,7 @@ func SetAudioABMixMode_AsString(mode OxtelAudioMixMode) string {
 //
 // rate1 defines the duration of the first half of the fade (time it takes to reach the midpoint).
 //
-// rate2 is the time from the midpoint to completeion.
+// rate2 is the time from the midpoint to completion.
 //
 // Both rates are measured in fields (interlaces) or frames (progressive).
 func (o *Oxtel) AudioABAsymmetricTransition(direction OxtelMixerInput, rate1 uint16, rate2 uint16) error {

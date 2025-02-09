@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// SetSessionLocks sets the session lock for the spcified item for this connection.
+// SetSessionLocks sets the session lock for the specified item for this connection.
 //
 // A session lock is a mechanism that Oxtel clients can use to prevent specific items from being changed via the Oxtel protocol.
 // Any Oxtel client can enable a Session Lock. When one client has a Session Lock on a defined item, a client that does not have the
@@ -21,7 +21,7 @@ func (o *Oxtel) SetSessionLocks(locks int32) error {
 	return o.sendCommand(fmt.Sprintf("hSL%08x", locks))
 }
 
-// SetSessionLocks_AsString returns the command string used to set the session lock for the spcified item for this connection.
+// SetSessionLocks_AsString returns the command string used to set the session lock for the specified item for this connection.
 //
 // For use with scheduled commands.
 func SetSessionLocks_AsString(locks int32) string {
@@ -118,14 +118,14 @@ func EnquireGlobalSessionLocks_AsString() string {
 	return "hGSL"
 }
 
-// SetPermanentLocks sets the permanet lock for the specified item.
+// SetPermanentLocks sets the permanent lock for the specified item.
 //
 // Use BuildSessionLocks to get the lock bitwise value.
 func (o *Oxtel) SetPermanentLocks(locks int32) error {
 	return o.sendCommand(fmt.Sprintf("hPL%08x", locks))
 }
 
-// SetPermanentLocks_AsString returns the command string used to set the permanet lock for the specified item.
+// SetPermanentLocks_AsString returns the command string used to set the permanent lock for the specified item.
 //
 // For use with scheduled commands.
 func SetPermanentLocks_AsString(locks int32) string {
