@@ -480,3 +480,99 @@ func (o *Oxtel) sendCommandExpectResponse(cmd string, data string) (string, erro
 		}
 	}
 }
+
+func (o *Oxtel) NewOxtelLayer(value uint8) OxtelLayer {
+	return OxtelLayer(value)
+}
+
+func (o *Oxtel) NewOxtelDirection(value uint8) OxtelDirection {
+	return OxtelDirection(value)
+}
+
+func (o *Oxtel) NewOxtelKeyerPositionTally(value uint8) OxtelKeyerPositionTally {
+	return OxtelKeyerPositionTally(value)
+}
+
+func (o *Oxtel) NewOxtelEnquireFileInfoResponse(value uint8) OxtelEnquireFileInfoResponse {
+	return OxtelEnquireFileInfoResponse(value)
+}
+
+func (o *Oxtel) NewOxtelMediaTallies(value uint8) OxtelMediaTallies {
+	return OxtelMediaTallies(value)
+}
+
+func (o *Oxtel) NewOxtelPlayStateTally(value uint8) OxtelPlayStateTally {
+	return OxtelPlayStateTally(value)
+}
+
+func (o *Oxtel) NewOxtelUpdateTextFieldFlag(value uint8) OxtelUpdateTextFieldFlag {
+	return OxtelUpdateTextFieldFlag(value)
+}
+
+func (o *Oxtel) NewOxtelTransitionType(value uint8) OxtelTransitionType {
+	return OxtelTransitionType(value)
+}
+
+func (o *Oxtel) NewOxtelMixerInput(value uint8) OxtelMixerInput {
+	return OxtelMixerInput(value)
+}
+
+func (o *Oxtel) NewOxtelVideoSource(value uint8) OxtelVideoSource {
+	return OxtelVideoSource(value)
+}
+
+func (o *Oxtel) NewOxtelARC(value uint8) OxtelARC {
+	return OxtelARC(value)
+}
+
+func (o *Oxtel) NewOxtelAudioSource(value uint8) OxtelAudioSource {
+	return OxtelAudioSource(value)
+}
+
+func (o *Oxtel) NewOxtelAudioProgram(value uint8) OxtelAudioProgram {
+	return OxtelAudioProgram(value)
+}
+
+func (o *Oxtel) NewOxtelJungerPreset(value uint8) OxtelJungerPreset {
+	return OxtelJungerPreset(value)
+}
+
+func (o *Oxtel) NewOxtelAudioMixMode(value uint8) OxtelAudioMixMode {
+	return OxtelAudioMixMode(value)
+}
+
+func (o *Oxtel) NewOxtelAudioOutput(value uint8) OxtelAudioOutput {
+	return OxtelAudioOutput(value)
+}
+
+func (o *Oxtel) NewOxtelLatencySource(value uint8) OxtelLatencySource {
+	return OxtelLatencySource(value)
+}
+
+func (o *Oxtel) NewOxtelVideoStandard(value uint8) OxtelVideoStandard {
+	return OxtelVideoStandard(value)
+}
+
+func (o *Oxtel) NewOxtelFieldRate(value uint8) OxtelFieldRate {
+	return OxtelFieldRate(value)
+}
+
+func (o *Oxtel) NewOxtelColorSpace(value uint8) OxtelColorSpace {
+	return OxtelColorSpace(value)
+}
+
+func (o *Oxtel) NewOxtelKantarOutput(value uint8) OxtelKantarOutput {
+	return OxtelKantarOutput(value)
+}
+
+func (o *Oxtel) NewOxtelExternalIOType(value uint8) OxtelExternalIOType {
+	return OxtelExternalIOType(value)
+}
+
+func (o *Oxtel) NewOxtelExternalIODirection(value uint8) OxtelExternalIODirection {
+	return OxtelExternalIODirection(value)
+}
+
+func (o *Oxtel) NewOxtelExternalIOId(value uint8) OxtelExternalIOId {
+	return OxtelExternalIOId(value)
+}
