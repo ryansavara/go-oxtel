@@ -2,11 +2,13 @@ package oxtel
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"io"
 	"net"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -18,6 +20,9 @@ type Oxtel struct {
 	rxMessages  chan string
 	lastCommand string
 	Unsolicited chan interface{}
+	closeOnce   sync.Once
+	ctx         context.Context
+	cancelFunc  context.CancelFunc
 }
 
 func NewOxtel(address string, port uint16) *Oxtel {
@@ -31,7 +36,7 @@ func NewOxtel(address string, port uint16) *Oxtel {
 }
 
 func (o *Oxtel) Connect() error {
-	address := fmt.Sprintf("%s:%d", o.address, o.port)
+	address := net.JoinHostPort(o.address, fmt.Sprintf("%d", o.port))
 
 	c, err := net.Dial("tcp", address)
 	if err != nil {
@@ -40,6 +45,9 @@ func (o *Oxtel) Connect() error {
 
 	o.conn = c
 	o.reader = *bufio.NewReader(c)
+
+	o.ctx, o.cancelFunc = context.WithCancel(context.Background())
+
 	go o.rxLoop()
 	return nil
 }
@@ -48,31 +56,41 @@ func (o *Oxtel) Disconnect() error {
 	if o.conn == nil {
 		return nil
 	}
-	close(o.rxMessages)
-	close(o.Unsolicited)
-	err := o.conn.Close()
 
-	if err == io.EOF {
-		err = nil
-	}
+	o.closeOnce.Do(func() {
+		if o.cancelFunc != nil {
+			o.cancelFunc()
+		}
+
+		close(o.rxMessages)
+		close(o.Unsolicited)
+		_ = o.conn.Close()
+	})
+
 	o.conn = nil
-	return err
+	return nil
 }
 
 func (o *Oxtel) rxLoop() {
 	for {
-		line, err := o.reader.ReadString(':')
-		if err != nil {
-			if err == io.EOF {
+		select {
+		case <-o.ctx.Done():
+			return
+		default:
+
+			line, err := o.reader.ReadString(':')
+			if err != nil {
+				if err == io.EOF {
+					break
+				}
+				o.Disconnect()
 				break
 			}
-			o.Disconnect()
-			break
-		}
 
-		line = strings.TrimSpace(line)
-		if len(line) > 0 {
-			o.handleMessage(line)
+			line = strings.TrimSpace(line)
+			if len(line) > 0 {
+				o.handleMessage(line)
+			}
 		}
 	}
 }
